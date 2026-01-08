@@ -78,5 +78,28 @@
         </div>
     </div>
 
+    <script>
+        const emailInput = document.getElementById('email');
+        const statusIcon = document.getElementById('status-icon');
+        const helperText = document.getElementById('helper-text');
+
+        emailInput.addEventListener('input', function(event) {
+            const email = event.target.value;
+          
+            if (email === '') {
+                resetStyles();
+                return;
+            }
+        });
+
+        function resetStyles() {
+            helperText.innerText = "Comece a digitar para validar...";
+            helperText.className = "mt-2 text-xs text-slate-500 ml-1 transition-colors duration-300";
+            emailInput.className = "block w-full pl-10 pr-10 py-3 bg-slate-50 border-2 border-slate-200 rounded-xl text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all duration-300";
+            statusIcon.classList.add('opacity-0');
+        }
+    </script>
+</body>
+
 </body>
 </html>
