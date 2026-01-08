@@ -79,11 +79,11 @@
     </div>
 
     <script>
+        const form = document.querySelector('form');
         const emailInput = document.getElementById('email');
         const statusIcon = document.getElementById('status-icon');
         const helperText = document.getElementById('helper-text');
-
-        // Regex para validação de e-mail (padrão comum)
+        const submitBtn = form.querySelector('button');
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         emailInput.addEventListener('input', function(event) {
@@ -94,14 +94,48 @@
                 return;
             }
 
-            // Testando o e-mail contra o Regex
             const isValid = emailRegex.test(email);
-
             if (isValid) {
                 setValidState();
             } else {
                 setInvalidState();
             }
+        });
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); 
+
+            const email = emailInput.value;
+
+            if (!emailRegex.test(email)) {
+                emailInput.focus();
+                setInvalidState();
+                return;
+            }
+
+            const originalBtnText = "Inscrever-se agora";
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="ph ph-spinner animate-spin text-xl align-middle mr-2"></i> Enviando...';
+            submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+
+            setTimeout(() => {
+                submitBtn.innerHTML = '<i class="ph-fill ph-check-circle text-xl align-middle mr-2"></i> Inscrito com Sucesso!';
+                submitBtn.classList.replace('bg-slate-900', 'bg-emerald-600');
+                submitBtn.classList.replace('hover:bg-slate-800', 'hover:bg-emerald-700');
+                helperText.innerText = "Cadastro realizado! Verifique sua caixa de entrada.";
+
+                setTimeout(() => {
+                    emailInput.value = '';
+                    resetStyles();
+                    
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = originalBtnText;
+                    submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                    submitBtn.classList.replace('bg-emerald-600', 'bg-slate-900');
+                    submitBtn.classList.replace('hover:bg-emerald-700', 'hover:bg-slate-800');
+                }, 3000);
+
+            }, 1500);
         });
 
         function setValidState() {
