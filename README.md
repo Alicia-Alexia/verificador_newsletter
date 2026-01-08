@@ -24,7 +24,8 @@ O projeto foi construído sobre três pilares de design:
 
 ### 1. Affordance e Feedback Visual
 * **Validação "Ao Vivo":** O usuário não precisa clicar em enviar para saber se errou. O feedback ocorre no evento `input`.
-* **Código de Cores Semântico:** * 🔘 **Cinza:** Estado neutro/espera.
+* **Código de Cores Semântico:** 
+    * 🔘 **Cinza:** Estado neutro/espera.
     * 🟢 **Verde:** Sucesso/Válido.
     * 🔴 **Vermelho:** Erro/Inválido.
 * **Iconografia Dinâmica:** Os ícones dentro do input mudam (`@` -> `Check` -> `Alert`) para reforçar o estado atual.
